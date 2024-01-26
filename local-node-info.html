@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<body>
+    <h1>NETWORK INFOS</h1>
+  <h2>Chain ID: <span id="chainId"></span></h2>
+  <h2>Number of blocks : <span id="blockNumber"></span></h2>
+
+  <script src="https://cdn.ethers.io/scripts/ethers-v4.min.js"
+        charset="utf-8"
+        type="text/javascript">
+  </script>
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        // Connect to a local Ethereum node
+        const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
+
+        // Get the chain ID
+        const chainId = await provider.getNetwork().then(network => network.chainId);
+
+        // Get the block number
+        //let blockNumber = 0;
+        const blockNumber = await provider.getBlockNumber();
+
+        // Display information on the page
+        document.getElementById('chainId').textContent = chainId;
+        document.getElementById('blockNumber').textContent = blockNumber;
+      } catch (error) {
+        console.error('Error:', error.message);
+      }
+    });
+  </script>
+</body>
+</html>
